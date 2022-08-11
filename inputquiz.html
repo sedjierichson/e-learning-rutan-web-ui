@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/js/fontawesome.min.js"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+
+    <title>Set Pertanyaan Quiz</title>
+  </head>
+  <body>
+    <div class="container my-5">
+        <h1>Set Pertanyaan Quiz</h1>
+
+        <div class="col-md-12 row my-4 p-5 rounded-5" style="background-color: rgba(210, 242, 255, 0.2);">
+            <div class="col-md-8 col-sm-12 pe-md-5">
+                <h1>Quiz Title</h1>
+                <p>(Quiz Description) Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum, placeat. Officia vero velit perspiciatis accusantium hic, magni tenetur, unde amet repudiandae facere omnis quibusdam ipsam. Dolorem animi maiores placeat impedit.</p>
+            </div>
+            
+            <div class="col-md-4 col-sm-12">
+                <p>Total Quiz Duration: </p>
+                <input type="number" class="form-control" id="hours" value="0" min="0"> hour
+                <input type="number" class="form-control" id="minutes" value="0" min="0" max="60"> minutes
+            </div>
+        </div>
+
+        <div id="questions-area">
+            <div class="col-md-12 row my-4 p-5 rounded-5" id="question-container" style="background-color: rgba(210, 242, 255, 0.2);">
+                <div class="col-md-8 col-sm-12">
+                    <textarea class="rounded-5 question" name="question" id="question" placeholder = "Tuliskan pertanyaan di sini..." style="width: 100%; height: 150px;"></textarea>
+
+                    <div id="choice-area">
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="" >
+                            <input type="text" class="form-control" placeholder="Pilihan Jawaban" id="choice">
+                        </div>
+
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="">
+                            <input type="text" class="form-control" placeholder="Pilihan Jawaban" id="choice">
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary btn-add-choice">
+                        <i class="fa fa-plus btn-add-choice-i" aria-hidden="true"></i>
+                    </button>
+                            
+                </div>
+
+                <div class="col-md-4 col-sm-12">
+                    <p>Score: </p>
+                    <input type="number" class="form-control mb-3" min="0">
+                </div>
+
+                <hr class="my-3">
+
+                <div class="container">
+                    <button class="btn btn-danger btn-delete"><i class="fa fa-trash btn-delete-i" aria-hidden="true"></i></button>
+                </div>
+
+                
+                
+
+            </div>
+        </div>
+        <button class="btn btn-success" id="btn-add">(+) Tambah Pertanyaan</button>
+        <br>
+        <button class="btn btn-primary my-4" id="btn-submit">Submit</button>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <script>
+        $(document).ready(function() {
+            $("#btn-add").click(function() {
+                var x = '<div class="col-md-12 row my-4 p-5 rounded-5" id="question-container" style="background-color: rgba(210, 242, 255, 0.2);"><div class="col-md-8 col-sm-12"><textarea class="rounded-5 question" name="question" id="question" placeholder = "Tuliskan pertanyaan di sini..." style="width: 100%; height: 150px;"></textarea><div id="choice-area"><div class="form-check mb-3"><input class="form-check-input" type="radio" name="flexRadioDefault" id="" ><input type="text" class="form-control" placeholder="Pilihan Jawaban" id="choice"></div><div class="form-check mb-3"><input class="form-check-input" type="radio" name="flexRadioDefault" id=""><input type="text" class="form-control" placeholder="Pilihan Jawaban" id="choice"></div></div><button class="btn btn-primary btn-add-choice"><i class="fa fa-plus btn-add-choice-i" aria-hidden="true"></i></button></div><div class="col-md-4 col-sm-12"><p>Score: </p><input type="number" class="form-control mb-3" min="0"></div><hr class="my-3"><div class="container"><button class="btn btn-danger btn-delete"><i class="fa fa-trash btn-delete-i" aria-hidden="true"></i></button></div></div>';
+                $("#questions-area").append(x);
+            });
+            
+            $("#btn-submit").click(function() {
+                $('#questions-area').children("#question-container").each(function () {
+                    console.log($(this).find('textarea[id="question"]').val()); 
+                    $(this).find('div[id="choice-area"]').children(".form-check").each(function() {
+                        console.log($(this).find('input[id="choice"]').val());
+                    });
+                });
+
+                
+            });
+
+            const questionsContainer = document.querySelector('#questions-area');
+            questionsContainer.addEventListener('click', function(e) {
+                // console.log(e.target.className);
+                if (e.target.className.includes('btn-delete-i')) {
+                    e.target.parentElement.parentElement.parentElement.remove();
+                } else if (e.target.className.includes('btn-delete')) {
+                    e.target.parentElement.parentElement.remove();
+                }
+
+                // const choiceElement = '<div class="form-check mb-3"><input class="form-check-input" type="radio" name="flexRadioDefault" id=""><input type="text" class="form-control" placeholder="Pilihan Jawaban" id="choice"></div>';
+
+                let chcElement = document.createElement('div');
+                chcElement.classList.add('form-check');
+                chcElement.classList.add('mb-3');
+
+                let inputRadio1 = document.createElement('input');
+                inputRadio1.classList.add('form-check-input');
+                inputRadio1.setAttribute('type', 'radio');
+                inputRadio1.setAttribute('name', 'flexRadioDefault');
+
+                let inputText1 = document.createElement('input');
+                inputText1.classList.add('form-control');
+                inputText1.setAttribute('type', 'text');
+                inputText1.setAttribute('placeholder', 'Pilihan Jawaban');
+                inputText1.setAttribute('id', 'choice');
+
+                chcElement.appendChild(inputRadio1);
+                chcElement.appendChild(inputText1);
+
+
+                if (e.target.className.includes('btn-add-choice-i')) {
+                    // console.log(e.target.parentElement.previousElementSibling);
+                    var obj = e.target.parentElement.previousElementSibling;
+                    obj.appendChild(chcElement);
+                } else if (e.target.className.includes('btn-add-choice')) {
+                    // console.log(e.target.previousElementSibling);
+                    var obj = e.target.previousElementSibling;
+                    obj.appendChild(chcElement);
+                }
+            });
+        });
+    </script>
+  </body>
+</html>
